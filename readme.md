@@ -3,7 +3,7 @@
 ################################
 
 ****************
-*** CONTENTS ***
+## CONTENTS
 
 1) Setup
 2) Basic game loop
@@ -15,7 +15,7 @@
 8) Using the DebugLog
 
 ****************
-** 1) Setup **
+## 1) Setup
 
 Copy files and folders into your project folder, then
 
@@ -24,7 +24,7 @@ Copy files and folders into your project folder, then
 ```
 
 **************************
-*** 2) Basic game loop ***
+## 2) Basic game loop
 
 This basic game loop is implemented using Stacks of GameStates, but other implementations are of course possible.
 
@@ -105,7 +105,7 @@ int main() {
 ```
 
 **********************************
-*** 3) Working with GameStates ***
+## 3) Working with GameStates
 
 GameStates can be used to create different functionality for each part of the game in a
 standardized manner. GameStates can represent levels of the game, or menus, for example.
@@ -159,7 +159,7 @@ kept crashing the program randomly.
 
 
 ********************************
-*** 4) Drawing to the screen ***
+## 4) Drawing to the screen
 
 In your custom gamestates update method, you can draw to the Screen by using the draw() 
 method of the Object you want to draw, for example
@@ -197,7 +197,7 @@ which should be done once per game loop. clear() is used to clear the buffer bef
 frame to it.
 
 *******************************
-**5) Working with Sprites**
+## 5) Working with Sprites
 
 To create a new sprite, use
 
@@ -229,7 +229,7 @@ Sprite* someSprite = new Sprite(player, COLOR_YELLOW, player[0].length(), 5);
 creates a "PLAYER"-sprite, completely in yellow characters.
 
 ************************************
-*** 6) Working with MenuElements ***
+## 6) Working with MenuElements
 
 A MenuElement is just an Object that conatains a sprite and has predefined colors for
 an active and an inactive state. This state can be toggled by using
@@ -245,7 +245,7 @@ someMenuElement->draw(Screen* Screen, int originX, int originY);
 ```
 
 *********************************
-*** 7) Working with SubStates ***
+## 7) Working with SubStates
 
 A substate is a portion of the screen that is implemented as its own GameState, which
 can be useful, for example, if you have your screen split into two parts that both include
@@ -274,7 +274,7 @@ starting at line 10 of the screen (which is the 11th line, of course) and with a
 ending at line 30.
 
 *****************************
-*** 8) Using the DebugLog ***
+## 8) Using the DebugLog
 
 To use the DebugLog, create a directory in your games root directory called "debug". To write to the logfile
 in this directory, just use the static method
