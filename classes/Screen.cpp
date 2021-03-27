@@ -10,6 +10,7 @@ Screen::Screen() {
 }
 
 void Screen::draw() {
+    updateWidth();
     WriteConsoleOutputA(this->hWrite, this->consoleBuffer, this->bufferSize, this->characterPosition, &this->consoleWriteArea);
 }
 
@@ -24,7 +25,7 @@ void Screen::updateWidth() {
     SetConsoleScreenBufferSize(this->hWrite, this->bufferSize);
 }
 
-void Screen::flush() {
+void Screen::clear() {
     for (int i = 0; i < this->consoleInfo.dwSize.X * 150; i++) {
         this->consoleBuffer[i].Char.AsciiChar = ' ';
         this->consoleBuffer[i].Attributes = 7;

@@ -1,5 +1,5 @@
-#ifndef TIME_H
-#define TIME_H
+#ifndef ASCENDIITIME_H
+#define ASCENDIITIME_H
 
 class Time {
     private:
@@ -10,4 +10,4 @@ class Time {
         static int getDeltaTime();
 };
 
-#endif // TIME_H
+#endif // ASCENDIITIME_H

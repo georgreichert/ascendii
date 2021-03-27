@@ -31,7 +31,7 @@
 #define BG_COLOR_YELLOW 224
 
 #include "headers/debuglog.h"
-#include "headers/time.h"
+#include "headers/ascendiitime.h"
 #include "headers/screen.h"
 #include "headers/sprite.h"
 #include "headers/gamestate.h"

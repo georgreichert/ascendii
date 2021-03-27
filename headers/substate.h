@@ -18,7 +18,7 @@ class SubState : public GameState {
         SubState(Screen* screen, float start, float width, int startLine, int height);
         virtual ~SubState() = 0;
         virtual void keyInput(int key) = 0;
-        virtual void draw(int deltaTime) = 0;
+        virtual void update(int deltaTime) = 0;
         virtual void toggleFocus();
         SubState* getNextState();
 };
