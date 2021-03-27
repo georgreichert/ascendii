@@ -18,6 +18,7 @@
 *** 1) Setup ***
 
 Copy files and folders into your project folder, then
+
 #include "ascendii.h"
 
 **************************
@@ -107,7 +108,7 @@ standardized manner. GameStates can represent levels of the game, or menus, for 
 The GameState class is an abstract class that provides the basic functionality every GameState
 needs:
 
-GameState* getNextState();
+GameState* getNextState();  
 bool leaveStatus();
 
 getNextState() can be used to access the next GameState that should be loaded, which, in the basic
@@ -126,7 +127,7 @@ state-stack is empty, the loop breaks and the game ends.
 Each child of the GameState class must provide a constructor that takes a pointer to a Screen, a destrucor 
 and these 2 methods:
 
-void keyInput(int key);
+void keyInput(int key);  
 void update(int deltaTime);
 
 which are used to receive and process keyboard inputs and to update the GameState with each frame.
@@ -190,13 +191,13 @@ new Sprite(std::string sprite[], int colors[], int width, int height);
 integer values with which you can set the color of every pixel, line by line
 from left to right. For example
 
-std::string player[5] = {
-        "####  ##      ####  ##  ## ###### #### ",
-        "## ## ##     ##  ##  ####  ##     ## ##",
-        "####  ##     ######   ##   ####   #### ",
-        "##    ##     ##  ##   ##   ##     ## ##",
-        "##    ###### ##  ##   ##   ###### ##  #"
-    };
+std::string player[5] = {  
+        "####  ##      ####  ##  ## ###### #### ",  
+        "## ## ##     ##  ##  ####  ##     ## ##",  
+        "####  ##     ######   ##   ####   #### ",  
+        "##    ##     ##  ##   ##   ##     ## ##",  
+        "##    ###### ##  ##   ##   ###### ##  #"  
+    };  
 Sprite* someSprite = new Sprite(player, COLOR_YELLOW, player[0].length(), 5);
 
 creates a "PLAYER"-sprite, completely in yellow characters.
