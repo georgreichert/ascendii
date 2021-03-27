@@ -168,9 +168,9 @@ inside your gamestates methods.
 The Screen class also has some predefined functions for drawing basic shapes or writing strings
 to the screen, currently these are
 
-void horizontalLine(int originX, int originY, int length, int color = COLOR_WHITE , char c = '#');
-void verticalLine(int originX, int originY, int length, int color = COLOR_WHITE, char c = '#');
-void write(std::string word, int originX, int originY, int color = COLOR_WHITE);
+void horizontalLine(int originX, int originY, int length, int color = COLOR_WHITE , char c = '#');  
+void verticalLine(int originX, int originY, int length, int color = COLOR_WHITE, char c = '#');  
+void write(std::string word, int originX, int originY, int color = COLOR_WHITE);  
 
 The screen itself has a draw() method too, which is used to write the screens buffer to the console, 
 which should be done once per game loop. clear() is used to clear the buffer before drawing the new
@@ -191,6 +191,7 @@ new Sprite(std::string sprite[], int colors[], int width, int height);
 integer values with which you can set the color of every pixel, line by line
 from left to right. For example
 
+<pre>
 std::string player[5] = {  
         "####  ##      ####  ##  ## ###### #### ",  
         "## ## ##     ##  ##  ####  ##     ## ##",  
@@ -199,6 +200,7 @@ std::string player[5] = {
         "##    ###### ##  ##   ##   ###### ##  #"  
     };  
 Sprite* someSprite = new Sprite(player, COLOR_YELLOW, player[0].length(), 5);
+</pre>
 
 creates a "PLAYER"-sprite, completely in yellow characters.
 
