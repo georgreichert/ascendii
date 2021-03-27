@@ -15,11 +15,13 @@
 8) Using the DebugLog
 
 ****************
-*** 1) Setup ***
+** 1) Setup **
 
 Copy files and folders into your project folder, then
 
+```c++
 #include "ascendii.h"
+```
 
 **************************
 *** 2) Basic game loop ***
@@ -110,18 +112,24 @@ standardized manner. GameStates can represent levels of the game, or menus, for 
 The GameState class is an abstract class that provides the basic functionality every GameState
 needs:
 
+```c++
 GameState* getNextState();  
 bool leaveStatus();
+```
 
 getNextState() can be used to access the next GameState that should be loaded, which, in the basic
 game loop provided here, is then added on top of the GameState-stack. It can be set from within the
 GameStates methods with
 
+```c++
 this->nextState = pointerToNextGameState;
+```
 
 leaveStatus() is used in a similar manner. To indicate that a GameState wants to close, use
 
+```c++
 this->leave = true;
+```
 
 inside the GameStates methods. In the basic game loop above, this will cause the deletion and removal
 of the state from the stack, returning to the underlying GameState from which it was loaded. If the
@@ -129,8 +137,10 @@ state-stack is empty, the loop breaks and the game ends.
 Each child of the GameState class must provide a constructor that takes a pointer to a Screen, a destrucor 
 and these 2 methods:
 
+```c++
 void keyInput(int key);  
 void update(int deltaTime);
+```
 
 which are used to receive and process keyboard inputs and to update the GameState with each frame.
 keyInput(int key) will be discarded in the future, and input will be handled in its own class that
@@ -139,7 +149,9 @@ The update method is called once per frame by the game loop. It's main use is fo
 to the screen. The deltaTime, the time since the last frame was drawn to the screen, that is  passed to 
 update() is available through
 
+```c++
 Time::getDeltaTime()
+```
 
 which must not be used more than once per loop cycle, because it contains a throttling mechanism to slow the
 engine down to 50 FPS, because the theoretically possible 500-1000 FPS that can be achieved in the console
@@ -152,7 +164,9 @@ kept crashing the program randomly.
 In your custom gamestates update method, you can draw to the Screen by using the draw() 
 method of the Object you want to draw, for example
 
+```c++
 someSprite->draw(screen, 0, 0, true);
+```
 
 will draw the sprite someSprite with its upper left corner in the upper left corner
 of the screen, the bool tells it to flip horizontally first. 
@@ -164,15 +178,19 @@ resize the console window to a very small size, which tends to push objects over
 left edge of the screen.
 You can always get the current width of the screen through using
 
+```c++
 this->screen->getWidth()
+```
 
 inside your gamestates methods.
 The Screen class also has some predefined functions for drawing basic shapes or writing strings
 to the screen, currently these are
 
+```c++
 void horizontalLine(int originX, int originY, int length, int color = COLOR_WHITE , char c = '#');  
 void verticalLine(int originX, int originY, int length, int color = COLOR_WHITE, char c = '#');  
 void write(std::string word, int originX, int originY, int color = COLOR_WHITE);  
+```
 
 The screen itself has a draw() method too, which is used to write the screens buffer to the console, 
 which should be done once per game loop. clear() is used to clear the buffer before drawing the new
@@ -183,17 +201,21 @@ frame to it.
 
 To create a new sprite, use
 
+```c++
 new Sprite(std::string sprite[], int color, int width, int height);
+```
 
 or
 
+```c++
 new Sprite(std::string sprite[], int colors[], int width, int height);
+```
 
 "color" is one color code for the whole sprite, "colors" is a one-dim. array of
 integer values with which you can set the color of every pixel, line by line
 from left to right. For example
 
-<pre>
+```c++
 std::string player[5] = {  
         "####  ##      ####  ##  ## ###### #### ",  
         "## ## ##     ##  ##  ####  ##     ## ##",  
@@ -202,7 +224,7 @@ std::string player[5] = {
         "##    ###### ##  ##   ##   ###### ##  #"  
     };  
 Sprite* someSprite = new Sprite(player, COLOR_YELLOW, player[0].length(), 5);
-</pre>
+```
 
 creates a "PLAYER"-sprite, completely in yellow characters.
 
@@ -212,11 +234,15 @@ creates a "PLAYER"-sprite, completely in yellow characters.
 A MenuElement is just an Object that conatains a sprite and has predefined colors for
 an active and an inactive state. This state can be toggled by using
 
+```c++
 someMenuElement->toggleActive();
+```
 
 As with sprites, you can simply draw it to the screen by using
 
+```c++
 someMenuElement->draw(Screen* Screen, int originX, int originY);
+```
 
 *********************************
 *** 7) Working with SubStates ***
@@ -227,15 +253,21 @@ different functionality or if you want to have instances of the same type of Sub
 than once on your screen. SubStates can track if they are currently focused or not, which can be
 toggled by
 
+```c++
 someSubState->toggleFocus();
+```
 
 SubStates are abstract classes, as are GameStates. To create a new SubState, use
 
+```c++
 new ChildOfSubState(Screen* screen, float start, float width, int startLine, int height);
+```
 
 For example
 
+```c++
 new ChildOfSubState(this->screen, 0.3f, 0.5f, 10, 20);
+```
 
 will create a SubState with its left edge at 30% of the screen width, a width of 50% the screens width,
 starting at line 10 of the screen (which is the 11th line, of course) and with a height of 20,
@@ -247,10 +279,14 @@ ending at line 30.
 To use the DebugLog, create a directory in your games root directory called "debug". To write to the logfile
 in this directory, just use the static method
 
+```c++
 DebugLog::log(std::string)
+```
 
 inside your code. Log entries will written to a "log.txt" file. To clear the log file, you can use 
 
+```c++
 DebugLog::reset()
+```
 
 which the standard game loop uses when the game starts.
