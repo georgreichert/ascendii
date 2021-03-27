@@ -26,6 +26,7 @@ Copy files and folders into your project folder, then
 
 This basic game loop is implemented using Stacks of GameStates, but other implementations are of course possible.
 
+```c++
 int main() {
     srand((unsigned)time(0));
     DebugLog::reset();
@@ -99,6 +100,7 @@ int main() {
     delete screen;
 
 }
+```
 
 **********************************
 *** 3) Working with GameStates ***
