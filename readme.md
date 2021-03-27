@@ -197,7 +197,7 @@ which should be done once per game loop. clear() is used to clear the buffer bef
 frame to it.
 
 *******************************
-*** 5) Working with Sprites ***
+**5) Working with Sprites**
 
 To create a new sprite, use
 
@@ -211,7 +211,7 @@ or
 new Sprite(std::string sprite[], int colors[], int width, int height);
 ```
 
-"color" is one color code for the whole sprite, "colors" is a one-dim. array of
+"color" is one color code for the whole sprite, "colors" is a one-dimensional array of
 integer values with which you can set the color of every pixel, line by line
 from left to right. For example
 
