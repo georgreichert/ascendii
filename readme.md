@@ -243,7 +243,12 @@ At the Moment, only simple movement animation is available. Use
 MoveAnimation::MoveAnimation(Sprite* sprite, int startX, int startY, int endX, int endY, int duration);
 ```
 
-to draw a moving sprite that takes the specified duration to reach its target spot.
+to create a moving sprite that takes the specified duration to reach its target spot. Draw it inside of the 
+update method with
+
+```c++
+MoveAnimation::draw(Screen* screen, int deltaTime, bool flipHorizontal);
+```
 
 ************************************
 ## 7) Working with MenuElements
