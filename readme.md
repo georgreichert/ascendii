@@ -26,13 +26,13 @@ Copy files and folders into your project folder, then
 **************************
 ## 2) Basic game loop
 
-This basic game loop is implemented using Stacks of GameStates, but other implementations are of course possible.
+This basic game loop is implemented using Stacks of GameState pointers, but other implementations are of course possible.
 
 ```c++
 int main() {
     srand((unsigned)time(0));
     DebugLog::reset();
-    Screen* screen = new Screen();
+    Screen* screen = new Screen("Your title");
     screen->fullScreen();
     int key = -1;
     bool pressed = false;

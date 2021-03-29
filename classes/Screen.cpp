@@ -1,8 +1,12 @@
 #include "../ascendii.h"
 
-Screen::Screen() {
+// sonsoleTitle sets text in title bar
+// screenbuffer is always 150 lines high, no matter the width
+// this should not go wrong for any console widths below
+// 330 characters. if more is needed, change buffer array size in screen.h
+Screen::Screen(std::string consoleTitle) {
     this->hWrite = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTitle("Fight Club");
+    SetConsoleTitle(consoleTitle.c_str());
     GetConsoleScreenBufferInfo(this->hWrite, &this->consoleInfo);
     this->bufferSize = {this->consoleInfo.dwSize.X, 150};
     this->consoleWriteArea = {0, 0, this->consoleInfo.dwSize.X, 150};
@@ -18,6 +22,7 @@ CHAR_INFO* Screen::getBuffer() {
     return this->consoleBuffer;
 }
 
+// ensures correct display after resizing the console window
 void Screen::updateWidth() {
     GetConsoleScreenBufferInfo(this->hWrite, &this->consoleInfo);
     this->bufferSize = {this->consoleInfo.dwSize.X, 150};
@@ -25,6 +30,7 @@ void Screen::updateWidth() {
     SetConsoleScreenBufferSize(this->hWrite, this->bufferSize);
 }
 
+// should usually be called before drawing to reset all characters in buffer to whitespace
 void Screen::clear() {
     for (int i = 0; i < this->consoleInfo.dwSize.X * 150; i++) {
         this->consoleBuffer[i].Char.AsciiChar = ' ';
@@ -50,6 +56,7 @@ void Screen::verticalLine(int originX, int originY, int length, int color, char 
     }
 }
 
+// writes a string to the screen
 void Screen::write(std::string word, int originX, int originY, int color) {
     for (int x = originX; x < originX + word.length(); x++) {
         this->consoleBuffer[x + this->getWidth() * originY].Char.AsciiChar = word[x-originX];

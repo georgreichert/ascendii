@@ -8,6 +8,7 @@ class DebugLog {
 
     public:
         static void log(std::string text);
+        // erases the previous log file
         static void reset();
 };
 

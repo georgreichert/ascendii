@@ -7,6 +7,7 @@ class Time {
         static int lastFrame;
 
     public:
+        // only use once per frame and store it in a variable, or throttling mechanism will cause cumulative delays
         static int getDeltaTime();
 };
 

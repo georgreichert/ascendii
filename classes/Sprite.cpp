@@ -1,9 +1,11 @@
 #include "../ascendii.h"
 
+// colors can be passed as one dimensional array of integers (left to right, line by line) or as single color value (see function below)
 Sprite::Sprite(std::string sprite[], int colors[], int width, int height) {
     init(sprite, colors, width, height);
 }
 
+// colors can be passed as one dimensional array of integers (see above function) (left to right, line by line) or as single color value
 Sprite::Sprite(std::string sprite[], int color, int width, int height) {
     int colors[width * height];
     for (int i = 0; i < width * height; i++) {
@@ -12,12 +14,14 @@ Sprite::Sprite(std::string sprite[], int color, int width, int height) {
     init(sprite, colors, width, height);
 }
 
+// this constructor is only used for cloning sprites
 Sprite::Sprite(CHAR_INFO** sprite, int width, int height) {
     this->sprite = sprite;
     this->width = width;
     this->height = height;
 }
 
+// initialize sprite after different constructors are handled
 void Sprite::init(std::string sprite[], int colors[], int width, int height) {
     this->width = width;
     this->height = height;
@@ -33,6 +37,7 @@ void Sprite::init(std::string sprite[], int colors[], int width, int height) {
     }
 }
 
+// draws sprite to the screen at specified origin coordinates
 void Sprite::draw(Screen* screen, int originX, int originY, bool flipHorizontal, char transparent) {
     CHAR_INFO* buffer = screen->getBuffer();
     int screenWidth = screen->getWidth();
@@ -56,6 +61,7 @@ int Sprite::getHeight() {
     return this->height;
 }
 
+// colors can be passed as one dimensional array of integers (see function below) (left to right, line by line) or as single color value
 void Sprite::setColor(int color) {
     int colors[this->width * this->height];
     for (int i = 0; i < this->width * this-> height; i++) {
@@ -64,6 +70,7 @@ void Sprite::setColor(int color) {
     setColor(colors);
 }
 
+// colors can be passed as one dimensional array of integers (see above function) (left to right, line by line) or as single color value
 void Sprite::setColor(int colors[]) {
     for (int y = 0; y < this->height; y++) {
         for (int x = 0; x < this->width; x++) {
@@ -72,6 +79,7 @@ void Sprite::setColor(int colors[]) {
     }
 }
 
+// returns the color of one specific character
 int Sprite::getColor(int x, int y) {
     return this->sprite[x][y].Attributes;
 }
@@ -83,6 +91,7 @@ Sprite::~Sprite() {
     delete[] this->sprite;
 }
 
+// private, only used by draw() method
 void Sprite::flip() {
     CHAR_INFO temp;
     for (int x = 0; x < this->width / 2; x++) {
@@ -94,6 +103,9 @@ void Sprite::flip() {
     }
     this->flipped = !this->flipped;
 }
+
+// sprite cloning can be useful when you have to use the same sprite flipped and normally
+// to boost performance
 
 Sprite* Sprite::clone() {
     CHAR_INFO** newSprite;

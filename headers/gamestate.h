@@ -8,7 +8,9 @@ class GameState {
 
     protected:
         Screen* screen = nullptr;
+        // set this->leave = true to indicate that this GameState wants to end,
         bool leave = false;
+        // set this->nextState to the next GameState you want to load,
         GameState* nextState = nullptr;
 
     public:

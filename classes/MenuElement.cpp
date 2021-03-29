@@ -1,5 +1,7 @@
 #include "../ascendii.h"
 
+// active elements are shown with activeColor,
+// inactive elements are shown with inactiveColor
 MenuElement::MenuElement(Sprite* sprite, bool active, int inactiveColor, int activeColor) {
     this->active = active;
     this->sprite = sprite;
@@ -11,6 +13,7 @@ MenuElement::~MenuElement() {
     delete this->sprite;
 }
 
+// toggle active state of an element and change its color accordingly
 void MenuElement::toggleActive() {
     this->active = !this->active;
     if(this->active && this->sprite->getColor(0,0) != this->activeColor) {
