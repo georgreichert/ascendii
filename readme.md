@@ -1,6 +1,11 @@
-################################
-#     ascendii Game Engine     #
-################################
+
+# ascendii Game Engine
+
+## Introduction
+
+As part of a university course, we are writing several text based console mini games during the course of one semester. I was trying to incorporate some ASCII graphics into the current homework project I am working on (which can be found here: https://github.com/georgreichert/ascendiiSampleGame), and that quickly snowballed into designing a whole collection of reusable classes that form a simple game engine, that I can use for this current project and the future projects to come.  
+
+Disclaimer: This is only usable with the Windows console. Also, due to this being part of a series of homework assignments that have deadlines, I did not include any means of error avoidance or exception handling yet. This will be added when I find the time for it. In the meantime, please watch the values you pass to functions, especially don't pass negative values or too high values as coordinates to draw() methods, as this will crash the game or lead to undefined behavior.
 
 ****************
 ## CONTENTS
