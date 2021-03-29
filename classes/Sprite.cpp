@@ -38,7 +38,7 @@ void Sprite::init(std::string sprite[], int colors[], int width, int height) {
 }
 
 // draws sprite to the screen at specified origin coordinates
-void Sprite::draw(Screen* screen, int originX, int originY, bool flipHorizontal, char transparent) {
+void Sprite::draw(Screen* screen, int originX, int originY, bool flipHorizontal) {
     CHAR_INFO* buffer = screen->getBuffer();
     int screenWidth = screen->getWidth();
     if ((flipHorizontal && !this->flipped) || (!flipHorizontal && this->flipped)) {
@@ -46,7 +46,7 @@ void Sprite::draw(Screen* screen, int originX, int originY, bool flipHorizontal,
     }
     for (int y = originY; y < this->height + originY; y++) {
         for (int x = originX; x < this->width + originX; x++) {
-            if (this->sprite[x-originX][y-originY].Char.AsciiChar != transparent) {
+            if (this->sprite[x-originX][y-originY].Char.AsciiChar != this->transparent) {
                 buffer[x + y * screenWidth] = this->sprite[x-originX][y-originY];
             }
         }
@@ -119,4 +119,9 @@ Sprite* Sprite::clone() {
         }
     }
     return new Sprite(newSprite, this->width, this->height);
+}
+
+// sets the char that is not drawn, 0 for no transparency
+void Sprite::setTransparent(char transparent) {
+    this->transparent = transparent;
 }
