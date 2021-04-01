@@ -15,9 +15,10 @@ Disclaimer: This is only usable with the Windows console. Also, due to this bein
 3) Working with GameStates
 4) Drawing to the screen
 5) Working with Sprites
-6) Working with MenuElements
-7) Working with SubStates
-8) Using the DebugLog
+6) Working with Animations
+7) Working with MenuElements
+8) Working with SubStates
+9) Using the DebugLog
 
 ****************
 ## 1) Setup
@@ -233,8 +234,24 @@ Sprite* someSprite = new Sprite(player, COLOR_YELLOW, player[0].length(), 5);
 
 creates a "PLAYER"-sprite, completely in yellow characters.
 
+*******************************
+## 6) Working with Animations
+
+At the Moment, only simple movement animation is available. Use
+
+```c++
+MoveAnimation::MoveAnimation(Sprite* sprite, int startX, int startY, int endX, int endY, int duration);
+```
+
+to create a moving sprite that takes the specified duration to reach its target spot. Draw it inside of the 
+update method with
+
+```c++
+MoveAnimation::draw(Screen* screen, int deltaTime, bool flipHorizontal);
+```
+
 ************************************
-## 6) Working with MenuElements
+## 7) Working with MenuElements
 
 A MenuElement is just an Object that conatains a sprite and has predefined colors for
 an active and an inactive state. This state can be toggled by using
@@ -250,7 +267,7 @@ someMenuElement->draw(Screen* Screen, int originX, int originY);
 ```
 
 *********************************
-## 7) Working with SubStates
+## 8) Working with SubStates
 
 A substate is a portion of the screen that is implemented as its own GameState, which
 can be useful, for example, if you have your screen split into two parts that both include
@@ -279,7 +296,7 @@ starting at line 10 of the screen (which is the 11th line, of course) and with a
 ending at line 30.
 
 *****************************
-## 8) Using the DebugLog
+## 9) Using the DebugLog
 
 To use the DebugLog, create a directory in your games root directory called "debug". To write to the logfile
 in this directory, just use the static method
