@@ -38,50 +38,46 @@ This basic game loop is implemented using Stacks of GameState pointers, but othe
 int main() {
     srand((unsigned)time(0));
     DebugLog::reset();
-    Screen* screen = new Screen("Your title");
+    Screen* screen = new Screen("Your Title");
     screen->fullScreen();
     int key = -1;
-    bool pressed = false;
     int deltaTime = 0;
     std::stack<GameState*> stateStack;
-    stateStack.push(new YourGameState(screen)); // You have to write your own GameStates that inherit from GameState
+    stateStack.push(new yourChildOfGameState(screen));
 
     while (1) {
         deltaTime = Time::getDeltaTime();
+        Input::update(deltaTime);
 
-	// these are all the Keys currently defined in the "ascendii.h" file
-        if (GetAsyncKeyState(VK_ESCAPE)) {
+        if (Input::getKeyDown(VK_ESCAPE)) {
             key = KEY_ESC;
-        } else if (GetAsyncKeyState(VK_SPACE) || GetAsyncKeyState(VK_RETURN)) {
+        } else if (Input::getKeyDown(VK_SPACE) || Input::getKeyDown(VK_RETURN)) {
             key = KEY_SPACE;
-        } else if (GetAsyncKeyState(VK_UP)) {
+        } else if (Input::getKeyDown(VK_UP)) {
             key = KEY_UP;
-        } else if (GetAsyncKeyState(VK_DOWN)) {
+        } else if (Input::getKeyDown(VK_DOWN)) {
             key = KEY_DOWN;
-        } else if (GetAsyncKeyState(VK_LEFT)) {
+        } else if (Input::getKeyDown(VK_LEFT)) {
             key = KEY_LEFT;
-        } else if (GetAsyncKeyState(VK_RIGHT)) {
+        } else if (Input::getKeyDown(VK_RIGHT)) {
             key = KEY_RIGHT;
-        } else if (GetAsyncKeyState('A')) {
+        } else if (Input::getKeyDown('A')) {
             key = 'A';
-        } else if (GetAsyncKeyState('S')) {
+        } else if (Input::getKeyDown('S')) {
             key = 'S';
-        } else if (GetAsyncKeyState('D')) {
+        } else if (Input::getKeyDown('D')) {
             key = 'D';
-        } else if (GetAsyncKeyState('J')) {
+        } else if (Input::getKeyDown('J')) {
             key = 'J';
-        } else if (GetAsyncKeyState('K')) {
+        } else if (Input::getKeyDown('K')) {
             key = 'K';
-        } else if (GetAsyncKeyState('L')) {
+        } else if (Input::getKeyDown('L')) {
             key = 'L';
         } else {
-            pressed = false;
             key = -1;
         }
-        if (!pressed && key != -1) {
-            stateStack.top()->keyInput(key);
-            pressed = true;
-        }
+        stateStack.top()->keyInput(key);
+
         GameState* next = stateStack.top()->getNextState();
         if (next != nullptr) {
             stateStack.push(next);
@@ -93,7 +89,6 @@ int main() {
         if (stateStack.empty()) {
             break;
         }
-        screen->updateWidth();
         screen->clear();
         stateStack.top()->update(deltaTime);
         screen->write(std::to_string(1000 / deltaTime) + " FPS", 0, 0, COLOR_WHITE);
