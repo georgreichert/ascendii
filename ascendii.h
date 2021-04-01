@@ -32,6 +32,7 @@
 
 #include "headers/debuglog.h"
 #include "headers/ascendiitime.h"
+#include "headers/input.h"
 #include "headers/screen.h"
 #include "headers/sprite.h"
 #include "headers/animation.h"
