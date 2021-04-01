@@ -32,7 +32,9 @@ Copy files and folders into your project folder, then
 **************************
 ## 2) Basic game loop
 
-This basic game loop is implemented using Stacks of GameState pointers, but other implementations are of course possible.
+This basic game loop is implemented using Stacks of GameState pointers, but other implementations are of course possible.  
+GameState::keyInput will be discarded with a future update, because the new Input class makes it unnecessary. Input handling
+will take place in each GameStates update() method instead.
 
 ```c++
 int main() {
