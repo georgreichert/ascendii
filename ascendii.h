@@ -34,6 +34,8 @@
 #include "headers/ascendiitime.h"
 #include "headers/screen.h"
 #include "headers/sprite.h"
+#include "headers/animation.h"
+#include "headers/moveanimation.h"
 #include "headers/gamestate.h"
 #include "headers/menuelement.h"
 #include "headers/substate.h"
