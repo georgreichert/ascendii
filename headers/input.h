@@ -7,6 +7,7 @@ class Input {
     private:
         static unsigned char keyboardState[256];
         static unsigned char lastKeyboardState[256];
+        static unsigned long long int keyPressTime[256];
         static bool initialized;
         static void initialize();
 

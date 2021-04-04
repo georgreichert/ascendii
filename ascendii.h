@@ -10,6 +10,7 @@
 #include <winuser.h>
 #include <chrono>
 #include <stdlib.h>
+#include <vector>
 
 #define KEY_UP    720
 #define KEY_LEFT  750
@@ -35,10 +36,12 @@
 #include "headers/input.h"
 #include "headers/screen.h"
 #include "headers/sprite.h"
+#include "headers/menuelement.h"
+#include "headers/menutextinput.h"
+#include "headers/menu.h"
 #include "headers/animation.h"
 #include "headers/moveanimation.h"
 #include "headers/gamestate.h"
-#include "headers/menuelement.h"
 #include "headers/substate.h"
 
 #endif // ASCENDII_H

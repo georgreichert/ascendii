@@ -4,7 +4,7 @@
 #include "../ascendii.h"
 
 class MenuElement {
-    private:
+    protected:
         Sprite* sprite;
         bool active;
         int inactiveColor;
