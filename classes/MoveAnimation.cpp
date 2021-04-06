@@ -12,7 +12,6 @@ MoveAnimation::MoveAnimation(Sprite* sprite, int startX, int startY, int endX, i
 void MoveAnimation::draw(Screen* screen, int deltaTime, bool flipHorizontal) {
     this->currentDuration += deltaTime;
     float lerpValue = (float)this->currentDuration / this->duration;
-    DebugLog::log(std::to_string(lerpValue) + " " + std::to_string(this->currentDuration) + " " + std::to_string(this->duration));
     this->sprite->draw(screen, startX + lerpValue * (endX - startX),
                        startY + lerpValue * (endY - startY), flipHorizontal);
 }

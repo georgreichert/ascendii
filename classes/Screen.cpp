@@ -66,4 +66,5 @@ void Screen::write(std::string word, int originX, int originY, int color) {
 
 void Screen::fullScreen() {
     ShowWindow(GetConsoleWindow() , SW_MAXIMIZE);
+    updateWidth();
 }
