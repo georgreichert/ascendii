@@ -19,6 +19,7 @@ Disclaimer: This is only usable with the Windows console. Also, due to this bein
 7) Working with MenuElements
 8) Working with SubStates
 9) Using the DebugLog
+10) Handling Input
 
 ****************
 ## 1) Setup
@@ -309,3 +310,24 @@ DebugLog::reset()
 ```
 
 which the standard game loop uses when the game starts.
+
+*****************************
+## 9) Handling Input
+
+The Input class offers a variety of static methods to read the current state of the keyboard. 
+There are 3 methods available:
+
+```c++
+bool Input::getKeyDown(int key); // true if key was pressed down between the last frame and this frame
+int Input::getKeyHold(int key); // if key is held down, returns time of continous key press in milliseconds
+bool Input::getKeyUp(int key); // true if key press was lifted between last frame and this frame
+```
+
+For the input class to work, in the game loop
+
+```c++
+Input::update(deltaTime);
+```
+
+must be called once per cycle, preferable before handling all other update methods, but after Time::getDeltaTime(). 
+See 2) Basic Game Loop for example.
