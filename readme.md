@@ -34,8 +34,6 @@ Copy files and folders into your project folder, then
 ## 2) Basic game loop
 
 This basic game loop is implemented using Stacks of GameState pointers, but other implementations are of course possible.  
-GameState::keyInput will be discarded with a future update, because the new Input class makes it unnecessary. Input handling
-will take place in each GameStates update() method instead.
 
 ```c++
 int main() {
@@ -43,7 +41,6 @@ int main() {
     DebugLog::reset();
     Screen* screen = new Screen("Your Title");
     screen->fullScreen();
-    int key = -1;
     int deltaTime = 0;
     std::stack<GameState*> stateStack;
     stateStack.push(new yourChildOfGameState(screen));
@@ -51,47 +48,21 @@ int main() {
     while (1) {
         deltaTime = Time::getDeltaTime();
         Input::update(deltaTime);
-
-        if (Input::getKeyDown(VK_ESCAPE)) {
-            key = KEY_ESC;
-        } else if (Input::getKeyDown(VK_SPACE) || Input::getKeyDown(VK_RETURN)) {
-            key = KEY_SPACE;
-        } else if (Input::getKeyDown(VK_UP)) {
-            key = KEY_UP;
-        } else if (Input::getKeyDown(VK_DOWN)) {
-            key = KEY_DOWN;
-        } else if (Input::getKeyDown(VK_LEFT)) {
-            key = KEY_LEFT;
-        } else if (Input::getKeyDown(VK_RIGHT)) {
-            key = KEY_RIGHT;
-        } else if (Input::getKeyDown('A')) {
-            key = 'A';
-        } else if (Input::getKeyDown('S')) {
-            key = 'S';
-        } else if (Input::getKeyDown('D')) {
-            key = 'D';
-        } else if (Input::getKeyDown('J')) {
-            key = 'J';
-        } else if (Input::getKeyDown('K')) {
-            key = 'K';
-        } else if (Input::getKeyDown('L')) {
-            key = 'L';
-        } else {
-            key = -1;
-        }
-        stateStack.top()->keyInput(key);
-
+        
         GameState* next = stateStack.top()->getNextState();
         if (next != nullptr) {
             stateStack.push(next);
         }
+        
         if (stateStack.top()->leaveStatus()) {
             delete stateStack.top();
             stateStack.pop();
         }
+        
         if (stateStack.empty()) {
             break;
         }
+        
         screen->clear();
         stateStack.top()->update(deltaTime);
         screen->write(std::to_string(1000 / deltaTime) + " FPS", 0, 0, COLOR_WHITE);
@@ -102,7 +73,6 @@ int main() {
         delete stateStack.top();
         stateStack.pop();
     }
-    Database::destroy();
     delete screen;
 
 }
@@ -147,8 +117,8 @@ void update(int deltaTime);
 ```
 
 which are used to receive and process keyboard inputs and to update the GameState with each frame.
-keyInput(int key) will be discarded in the future, and input will be handled in its own class that
-will be accessible inside the update method, to enable the handling of simultaneous key inputs.
+GameState::keyInput will be discarded with a future update, because the new Input class makes it unnecessary. Input handling
+takes place in each GameStates update() method instead.  
 The update method is called once per frame by the game loop. It's main use is for game logic and to draw
 to the screen. The deltaTime, the time since the last frame was drawn to the screen, that is  passed to 
 update() is available through
