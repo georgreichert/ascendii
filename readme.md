@@ -5,7 +5,7 @@
 
 As part of a university course, we are writing several text based console mini games during the course of one semester. I was trying to incorporate some ASCII graphics into the current homework project I am working on (which can be found here: https://github.com/georgreichert/ascendiiSampleGame), and that quickly snowballed into designing a whole collection of reusable classes that form a simple game engine, that I can use for this current project and the future projects to come.  
 
-Disclaimer: This is only usable with the Windows console. Also, due to this being part of a series of homework assignments that have deadlines, I did not include any means of error avoidance or exception handling yet. This will be added when I find the time for it. In the meantime, please watch the values you pass to functions, especially don't pass negative values or too high values as coordinates to draw() methods, as this will crash the game or lead to undefined behavior.
+Disclaimer: This is only usable with the Windows console, and at the moment is not easily portable to Visual Studio, it works fine with Code::Blocks. Also, due to this being part of a series of homework assignments that have deadlines, I did not include any means of error avoidance or exception handling yet. This will be added when I find the time for it. In the meantime, please watch the values you pass to functions, especially don't pass negative values or too high values as coordinates to draw() methods, as this will crash the game or lead to undefined behavior.
 
 ****************
 ## CONTENTS
@@ -109,16 +109,13 @@ inside the GameStates methods. In the basic game loop above, this will cause the
 of the state from the stack, returning to the underlying GameState from which it was loaded. If the
 state-stack is empty, the loop breaks and the game ends.
 Each child of the GameState class must provide a constructor that takes a pointer to a Screen, a destrucor 
-and these 2 methods:
+and this method:
 
 ```c++
-void keyInput(int key);  
 void update(int deltaTime);
 ```
 
 which are used to receive and process keyboard inputs and to update the GameState with each frame.
-GameState::keyInput will be discarded with a future update, because the new Input class makes it unnecessary. Input handling
-takes place in each GameStates update() method instead.  
 The update method is called once per frame by the game loop. It's main use is for game logic and to draw
 to the screen. The deltaTime, the time since the last frame was drawn to the screen, that is  passed to 
 update() is available through
